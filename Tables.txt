@@ -1,0 +1,44 @@
+CREATE TABLE Courses (
+    CourseID INT PRIMARY KEY,
+    CourseName VARCHAR(255) NOT NULL,
+    Description TEXT,
+    
+);
+
+Mentors table
+CREATE TABLE Mentors (
+    MentorID INT PRIMARY KEY,
+    FirstName VARCHAR(50) NOT NULL,
+    LastName VARCHAR(50) NOT NULL,
+    Email VARCHAR(100),
+    
+);
+
+Students table
+CREATE TABLE Students (
+    StudentID INT PRIMARY KEY,
+    FirstName VARCHAR(50) NOT NULL,
+    LastName VARCHAR(50) NOT NULL,
+    Email VARCHAR(100),
+    CourseID INT REFERENCES Courses(CourseID),
+    
+);
+Batches table
+CREATE TABLE Batches (
+    BatchID INT PRIMARY KEY,
+    BatchName VARCHAR(50) NOT NULL,
+    StartDate DATE,
+    EndDate DATE,
+    CourseID INT REFERENCES Courses(CourseID),
+    MentorID INT REFERENCES Mentors(MentorID),
+    
+);
+
+Enrollments table
+CREATE TABLE Enrollments (
+    EnrollmentID INT PRIMARY KEY,
+    StudentID INT REFERENCES Students(StudentID),
+    BatchID INT REFERENCES Batches(BatchID),
+    EnrollmentDate DATE,
+    
+);
